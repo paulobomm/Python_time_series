@@ -75,3 +75,42 @@ print(calcular_media.__doc__)
 | **Público-alvo** | Desenvolvedores que estão lendo o código-fonte do arquivo. | Usuários da função/classe/módulo e ferramentas de documentação automática. |
 
 Em resumo, pense no **cabeçalho** como a capa de um livro, fornecendo informações gerais sobre a obra. A **docstring**, por sua vez, é o resumo na contracapa ou o prefácio, explicando o que você encontrará dentro daquele capítulo (ou função/classe). Utilizar ambos corretamente é uma marca de um desenvolvedor Python cuidadoso e profissional.
+
+
+
+######################################################################
+
+
+# implemente as funções abaixo e coloque as docstrings
+
+def maximo(nums):
+    """oque faz
+    oque recebe
+    oque retorna"""
+    # TODO: percorra a lista guardando o maior atual
+    ...
+
+def e_par(n: int) -> bool:
+    """ ... """
+    # TODO: retorne se n é par
+    ...
+def fatorial(n: int) -> int:
+    """   ...  """
+    # TODO: implemente de forma iterativa (sem recursão)
+    ...
+import re
+
+def limpa_texto(s: str) -> str:
+    """..."""
+    # TODO: converta s para minúsculo e remova pontuações como ,.;:!?'"()-_
+    ...
+
+def conta_vogais(s: str) -> int:
+    """....."""
+    # TODO: conte as vogais simples
+    ...
+
+def palindromo(s: str) -> bool:
+    """..."""
+    # TODO: normalizar (minúsculo, remover não alfanumérico) e comparar com o reverso
+    ...
