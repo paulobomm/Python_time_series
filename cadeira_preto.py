@@ -114,3 +114,170 @@ def palindromo(s: str) -> bool:
     """..."""
     # TODO: normalizar (minúsculo, remover não alfanumérico) e comparar com o reverso
     ...
+
+---------------------------------------------------------------------------------------------
+
+"""
+text_utils.py
+
+import re
+
+
+def maximo(nums: Iterable[Number]) -> Optional[Number]:
+    """Retorna o maior valor de um iterável de números.
+
+    Percorre o iterável comparando itens e mantém o maior atual.
+
+    Args:
+        nums: Iterável de valores numéricos (int ou float).
+
+    Returns:
+        O maior número encontrado ou None se o iterável estiver vazio.
+
+    Examples:
+        >>> maximo([])
+        >>> maximo([1])
+        1
+        >>> maximo([-5, -2, -10])
+        -2
+        >>> maximo([1, 2.5, 2])
+        2.5
+    """
+    iterator = iter(nums)
+    try:
+        maior = next(iterator)
+    except StopIteration:
+        return None
+
+    for valor in iterator:
+        if valor > maior:
+            maior = valor
+    return maior
+
+
+def e_par(n: int) -> bool:
+    """Verifica se um número inteiro é par.
+
+    Args:
+        n: Número inteiro a ser verificado.
+
+    Returns:
+        True se n for par; False caso contrário.
+
+    Examples:
+        >>> e_par(0)
+        True
+        >>> e_par(7)
+        False
+        >>> e_par(-4)
+        True
+    """
+    return (n % 2) == 0
+
+
+def fatorial(n: int) -> int:
+    """Calcula o fatorial de um número de forma iterativa (sem recursão).
+
+    Args:
+        n: Inteiro não negativo.
+
+    Returns:
+        O valor de n! (fatorial de n).
+
+    Raises:
+        TypeError: Se n não for int.
+        ValueError: Se n for negativo.
+
+    Examples:
+        >>> fatorial(0)
+        1
+        >>> fatorial(1)
+        1
+        >>> fatorial(5)
+        120
+    """
+    if not isinstance(n, int):
+        raise TypeError("fatorial: 'n' deve ser int.")
+    if n < 0:
+        raise ValueError("fatorial: não definido para números negativos.")
+    resultado = 1
+    for i in range(2, n + 1):
+        resultado *= i
+    return resultado
+
+
+def limpa_texto(s: str) -> str:
+    """Converte `s` para minúsculo e remove pontuações básicas.
+
+    Remove os caracteres: , . ; : ! ? ' " ( ) - _
+
+    Obs.: Mantemos espaços; se desejar normalizar espaços também,
+    use `re.sub(r"\\s+", " ", texto).strip()` após esta função.
+
+    Args:
+        s: Texto de entrada.
+
+    Returns:
+        Texto em minúsculo sem as pontuações listadas.
+
+    Examples:
+        >>> limpa_texto("Olá, Mundo!!!")
+        'olá mundo'
+        >>> limpa_texto("A-b_c(d)e")
+        'ab cde'
+    """
+    texto = s.lower()
+    # Remoção direta das pontuações definidas; preserva outros sinais (como acentos).
+    texto = _PONTUACAO_RE.sub("", texto)
+    return texto
+
+
+def conta_vogais(s: str) -> int:
+    """Conta vogais simples (a, e, i, o, u) no texto.
+
+    A contagem é *case-insensitive* e não considera acentos (ex.: 'á' não é contado).
+    Para contar vogais acentuadas também, ajuste o conjunto de vogais conforme sua regra.
+
+    Args:
+        s: Texto de entrada.
+
+    Returns:
+        Quantidade de vogais simples.
+
+    Examples:
+        >>> conta_vogais("Python")
+        1
+        >>> conta_vogais("aeiou AEIOU")
+        10
+        >>> conta_vogais("áéíóú")
+        0
+    """
+    vogais = {"a", "e", "i", "o", "u"}
+    return sum(1 for ch in s.lower() if ch in vogais)
+
+
+def palindromo(s: str) -> bool:
+    """Verifica se um texto é palíndromo, ignorando caixa e não-alfanuméricos.
+
+    A normalização aplicada:
+      - `casefold()` para comparação sem distinção de maiúsculas/minúsculas
+      - filtro `str.isalnum()` para manter apenas caracteres alfanuméricos (Unicode)
+
+    Args:
+        s: Texto a ser verificado.
+
+    Returns:
+        True se `s` for palíndromo após normalização; False caso contrário.
+
+    Examples:
+        >>> palindromo("ana")
+        True
+        >>> palindromo("Roma é amor")
+        True
+        >>> palindromo("Python")
+        False
+        >>> palindromo("Socorram-me, subi no ônibus em Marrocos")
+        True
+    """
+    norm = "".join(ch for ch in s.casefold() if ch.isalnum())
+    return norm == norm[::-1]
